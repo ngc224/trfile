@@ -15,7 +15,7 @@ import (
 )
 
 // Golang time format
-var fileNameFormat = "./logs/2006/01/02/halo.log" //=> ./logs/2016/09/13/halo.log"
+var fileNameFormat = "logs/2006/01/02/halo.log" //=> logs/2016/09/13/halo.log
 
 func main() {
 	w, err := trfile.NewFormat(fileNameFormat)
