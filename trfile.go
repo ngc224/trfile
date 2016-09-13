@@ -2,6 +2,7 @@ package trfile
 
 import (
 	"os"
+	"path"
 	"time"
 )
 
@@ -9,12 +10,14 @@ type TimeRotateFile struct {
 	fileNameFormat string
 	file           *os.File
 	FileMode       os.FileMode
+	DirFileMode    os.FileMode
 }
 
-func New(fileNameFormat string) (*TimeRotateFile, error) {
+func NewFormat(fileNameFormat string) (*TimeRotateFile, error) {
 	trf := &TimeRotateFile{
 		fileNameFormat: fileNameFormat,
-		FileMode:       0666,
+		FileMode:       0644,
+		DirFileMode:    0755,
 	}
 
 	if err := trf.fileSet(); err != nil {
@@ -29,7 +32,15 @@ func (trf *TimeRotateFile) fileNameNow() string {
 }
 
 func (trf *TimeRotateFile) fileSet() error {
-	file, err := os.OpenFile(trf.fileNameNow(), os.O_RDWR|os.O_CREATE|os.O_APPEND, trf.FileMode)
+	fileNameNow := trf.fileNameNow()
+
+	if dir, _ := path.Split(fileNameNow); len(dir) > 0 {
+		if err := os.MkdirAll(dir, trf.DirFileMode); err != nil {
+			return err
+		}
+	}
+
+	file, err := os.OpenFile(fileNameNow, os.O_RDWR|os.O_CREATE|os.O_APPEND, trf.FileMode)
 
 	if err != nil {
 		return err

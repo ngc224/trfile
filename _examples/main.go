@@ -7,10 +7,11 @@ import (
 	"github.com/ngc224/trfile"
 )
 
-var fileNameFormat = "test_20060102.log" //Golang time format
+// Golang time format
+var fileNameFormat = "./logs/2006/01/02/halo.log" //=> ./logs/2016/09/13/halo.log"
 
 func main() {
-	w, err := trfile.New(fileNameFormat)
+	w, err := trfile.NewFormat(fileNameFormat)
 
 	if err != nil {
 		os.Exit(1)
