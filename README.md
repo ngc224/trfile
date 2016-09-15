@@ -14,8 +14,7 @@ import (
 	"github.com/ngc224/trfile"
 )
 
-// Golang time format
-var fileNameFormat = "logs/2006/01/02/halo.log" //=> logs/2016/09/13/halo.log
+var fileNameFormat = "logs/2006/01/02/halo.log" // Golang time format
 
 func main() {
 	w, err := trfile.NewFormat(fileNameFormat)
@@ -25,6 +24,6 @@ func main() {
 	}
 
 	log.SetOutput(w)
-	log.Println("Halo World!")
+	log.Println("Halo World!") // Now time => logs/2016/09/13/halo.log
 }
 ```
