@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ngc224/trfile"
+	"github.com/nissy/trfile"
 )
 
 // Golang time format

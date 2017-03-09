@@ -11,7 +11,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/ngc224/trfile"
+	"github.com/nissy/trfile"
 )
 
 var fileNameFormat = "logs/2006/01/02/halo.log" // Golang time format
